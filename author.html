@@ -3,208 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>作者主页 - 创世联盟</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>张宁海 -个人介绍页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            line-height: 1.7;
-            background: #f8f9fa;
-            color: #2c3e50;
+        :root {
+            --primary: #2A5C82;
+            --secondary: #6C9BBF;
+            --accent: #FF7F50;
+            --text: #2C3E50;
+        }
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            padding: 1rem 10%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text);
         }
-        .logo {
-            font-weight: 700;
-            color: #1a73e8;
-            text-decoration: none;
-        }
-        .nav-link {
-            color: #5f6368;
-            margin-left: 2rem;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #1a73e8;
-        }
-        .profile-container {
+
+        .container {
             max-width: 1200px;
-            margin: 4rem auto 0;
-            padding: 0 2rem;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .profile-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-        .profile-header {
-            background: linear-gradient(135deg, #1a73e8, #4a90e2);
-            height: 150px;
+
+        /* 头部样式 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 120px 0 180px;
             position: relative;
+            clip-path: ellipse(100% 65% at 50% 35%);
         }
-        .profile-avatar {
-            width: 200px;
-            height: 200px;
+
+        .avatar {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 5px solid white;
+            border: 4px solid white;
             position: absolute;
             left: 50%;
+            /* bottom: -90px; */
             transform: translateX(-50%);
-            bottom: -70px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
-        .profile-name {
-            text-align: center;
-            margin: 90px 0 10px;
-            color: #2c3e50;
-            font-size: 2rem;
-            font-weight: 500;
+
+        .avatar:hover {
+            transform: translateX(-50%) scale(1.05);
         }
-        .profile-title {
+
+        /* 内容卡片 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 100px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 文字排版 */
+        .name {
             text-align: center;
-            color: #6c757d;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--secondary);
             margin-bottom: 2rem;
         }
-        .profile-section {
-            padding: 2rem;
-            border-bottom: 1px solid #e8e8e8;
-        }
-        .profile-section:last-child {
-            border-bottom: none;
-        }
+
         .section-title {
-            color: #1a73e8;
-            font-size: 1.25rem;
+            color: var(--primary);
+            font-size: 1.5rem;
             margin-bottom: 1.5rem;
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 1.2rem;
         }
+
         .section-title::before {
             content: '';
             position: absolute;
             left: 0;
             top: 50%;
-            width: 4px;
-            height: 20px;
-            background: #1a73e8;
-            border-radius: 2px;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 1.5em;
+            background: var(--accent);
+            border-radius: 3px;
         }
-        .skill-tags {
+
+        /* 技能标签 */
+        .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
         }
-        .skill-tag {
-            background: #e8f4ff;
-            color: #1a73e8;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
+
+        .skill {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
             font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
         }
-        .achievement-item {
-            display: flex;
-            align-items: center;
-            margin: 1rem 0;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .achievement-icon {
-            color: #1a73e8;
-            margin-right: 1rem;
-            font-size: 1.2rem;
+
+        /* 时间轴 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
         }
-        .social-icons {
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background: var(--secondary);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem 0 1.5rem 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+
+        /* 社交链接 */
+        .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        .social-icon {
-            color: #6c757d;
-            font-size: 1.5rem;
-            transition: color 0.3s;
+
+        .social-link {
+            font-size: 1.8rem;
+            color: var(--text);
+            transition: all 0.3s ease;
         }
-        .social-icon:hover {
-            color: #1a73e8;
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
         }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .profile-avatar {
-                width: 150px;
-                height: 150px;
-                /* bottom: 200px; */
+            .hero {
+                padding: 80px 0 140px;
+                clip-path: ellipse(120% 60% at 50% 35%);
             }
-            .profile-name {
-                font-size: 1.5rem;
+
+            .avatar {
+                width: 140px;
+                height: 140px;
+                /* bottom: -70px; */
+                margin-bottom: 100px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                padding: 80px 0;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="./cslmlog.html" class="logo">创世联盟</a>
-        <!-- <a href="/" class="nav-link">返回官网</a> -->
-    </nav>
-
-    <div class="profile-container">
-        <div class="profile-card">
-            <div class="profile-header"></div>
-            <!-- <img src="https://picsum.photos/200/200?random=1" alt="作者头像"> -->
-            <!-- <img src="https://picsum.photos/200/200?random=1" alt="作者头像" class="profile-avatar"> -->
-            
-            <div class="profile-name">林星辰</div>
-            <div class="profile-title">首席游戏架构师 & 创意总监</div>
-
-            <div class="profile-section">
-                <div class="section-title">个人简介</div>
-                <p>
-                    清华大学计算机系博士，前微软首席架构师，现创世联盟技术负责人。
-                    主导开发过3款百万级在线游戏，拥有15年游戏引擎开发经验。
-                </p>
-            </div>
-
-            <div class="profile-section">
-                <div class="section-title">核心技能</div>
-                <div class="skill-tags">
-                    <div class="skill-tag">Unreal Engine 5</div>
-                    <div class="skill-tag">分布式架构</div>
-                    <div class="skill-tag">AI算法设计</div>
-                    <div class="skill-tag">跨平台开发</div>
-                </div>
-            </div>
-
-            <div class="profile-section">
-                <div class="section-title">主要成就</div>
-                <div class="achievement-item">
-                    <i class="fas fa-trophy achievement-icon"></i>
-                    <div>GDC最佳创新奖 (2022)</div>
-                </div>
-                <div class="achievement-item">
-                    <i class="fas fa-star achievement-icon"></i>
-                    <div>微软最有价值专家 (2020-2022)</div>
-                </div>
-                <div class="achievement-item">
-                    <i class="fas fa-certificate achievement-icon"></i>
-                    <div>游戏架构专利发明人</div>
-                </div>
-            </div>
-
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
-            </div>
-        </div>
+    <div class="hero">
+        <img src="头像.png" alt="张宁海" class="avatar">
     </div>
 
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <div class="container">
+        <h1 class="name">张宁海</h1>
+        <!-- <p class="title">首席全栈架构师 & 技术顾问</p> -->
+
+        <div class="card-grid">
+            <!-- 个人信息 -->
+            <div class="card">
+                <h2 class="section-title">个人简介</h2>
+                <p>人工智能专业</p>
+                
+                <div class="contact-info" style="margin-top: 1.5rem;">
+                    <p><i class="fas fa-envelope"></i> wangyi17704265766@163.com</p>
+                    <p><i class="fas fa-phone"></i>17704265766</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 中国，辽宁锦州&沈阳</p>
+                </div>
+            </div>
+
+            <!-- 技术能力 -->
+            <div class="card">
+                <h2 class="section-title">技术栈</h2>
+                <div class="skill-list">
+                    <span class="skill">python</span>
+                    <span class="skill">计算机视觉</span>
+                    <span class="skill">机器学习</span>
+                    <span class="skill">深度学习</span>
+                    <span class="skill">服务器</span>
+                    <span class="skill">大模型应用</span>
+                    <span class="skill">Vue.js</span>
+                    <span class="skill">Flask</span>
+                </div>
+            </div>
+
+            <!-- 工作经历 -->
+            <div class="card">
+                <h2 class="section-title">在校经历</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3></h3>
+                        <p>2020 - 至今</p>
+                        <p>带领15+人团队，完成竞赛项目</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>首席架构师 · 阿里云</h3>
+                        <p>2016 - 2020</p>
+                        <p>主导云原生平台架构设计，日均处理10亿+请求</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社交链接 -->
+        <div class="social-links">
+            <a href="https://github.com/GitHub-Ninghai" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="https://blog.csdn.net/tianhai12" class="social-link"><i class="fas fa-laptop-code"></i></a>
+            <!-- <a href="#" class="social-link"><i class="fab fa-twitter"></i></a> -->
+            <a href="https://mp.weixin.qq.com/s/mdCoQ9G9tlLWXOr6dWUFDw" class="social-link"><i class="fab fa-weixin"></i></a>
+        </div>
+    </div>
 </body>
 </html>
